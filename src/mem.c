@@ -24,6 +24,7 @@
 
 #include <stdlib.h>
 #include "mem.h"
+#include "err.h"
 
 void *
 mem_malloc (unsigned int size, bool_t crit)
