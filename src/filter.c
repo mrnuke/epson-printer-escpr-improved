@@ -34,6 +34,8 @@
 #include "epson-protocol.h"
 #include "epson-escpr-api.h"
 #include "epson-escpr-mem.h"
+#include "epson-escpr-services.h"
+#include "epson-escpage.h"
 
 #include "err.h"
 #include "mem.h"
@@ -42,6 +44,11 @@
 #include "libprtX.h"
 #include "optBase.h"
 #include "linux_cmn.h"
+#include "xfifo.h"
+
+extern EPS_ERR_CODE SetupJobAttrib (const EPS_JOB_ATTRIB*);
+extern EPS_ERR_CODE SendStartJob ();
+extern EPS_ERR_CODE PrintBand (const EPS_UINT8*, EPS_UINT32, EPS_UINT32*);
 
 #define WIDTH_BYTES(bits) (((bits) + 31) / 32 * 4)
 
@@ -382,7 +389,7 @@ main (int argc, char *argv[])
 	}
 	
 	printJob.jobStatus = EPS_STATUS_ESTABLISHED;
-	int printHeight = 0;
+    EPS_UINT32 printHeight = 0;
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////	
 
 	print_area_x = printJob.printableAreaWidth;
@@ -535,7 +542,7 @@ main (int argc, char *argv[])
 						memcpy(rever_buf + k*3, startpage + pos + (bandBmp.widthBytes - 6) - k*3, 3);
 					}
 				}
-				PrintBand (rever_buf, bandBmp.widthBytes, &printHeight);
+                PrintBand ((const EPS_UINT8 *)rever_buf, bandBmp.widthBytes, &printHeight);
 				pos -= bandBmp.widthBytes;
 			}
 
@@ -831,7 +838,7 @@ set_pips_parameter (filter_option_t *filter_opt_p, EPS_OPT *printOpt)
 
 	/* Get number of pages */
 	char page_num;
-	read (STDIN_FILENO, &page_num, 1);
+    (void)read (STDIN_FILENO, &page_num, 1);
 
 	/* Others */
 	jobAttr.apfAutoCorrect = EPS_APF_ACT_STANDARD;
@@ -881,7 +888,7 @@ EPS_INT32 print_spool_fnc(void* hParam, const EPS_UINT8* pBuf, EPS_UINT32 cbBuf)
 
 //	fwrite (pBuf, cbBuf, 1, outfp);
 
-	XFIFOWrite(context, pBuf, cbBuf);
+    XFIFOWrite(context, (char *)pBuf, cbBuf);
 
 	return 1;
 }
