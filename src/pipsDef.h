@@ -103,6 +103,14 @@ enum eOUTPUT_FORMAT
 #define	    PM_MSID_PALBUM_A5_L         0x29
 #define	    PM_MSID_PALBUM_A4           0x2A
 #define	    PM_MSID_4X7                 0x2B
+
+#define	    PM_MSID_KAKU_2              0x2C
+#define	    PM_MSID_ENV_C4_P            0x2D
+#define	    PM_MSID_B6                  0x2E
+#define	    PM_MSID_KAKU_20             0x2F
+#define	    PM_MSID_A5_24HOLE           0x30
+#define	    PM_MSID_CHOKEI_40           0x34
+
 #define	    PM_MSID_A3NOBI              0x3D
 #define	    PM_MSID_A3                  0x3E
 #define	    PM_MSID_B4                  0x3F
@@ -113,7 +121,20 @@ enum eOUTPUT_FORMAT
 #define	    PM_MSID_USC                 0x44
 #define     PM_MSID_10X12               0x45
 #define     PM_MSID_12X12               0x46
+
+#define     PM_MSID_SP1                 0x47
+#define     PM_MSID_SP2                 0x48
+#define     PM_MSID_SP3                 0x49
+#define     PM_MSID_SP4                 0x4A
+#define     PM_MSID_SP5                 0x4B
+#define     PM_MSID_16K                 0x4C
+#define     PM_MSID_8K                  0x4D
+
 #define	    PM_MSID_USER                0x63
+
+#define	    PM_MSID_HALFCUT             0x80
+#define	    PM_MSID_16X20               0x81
+
 #define	    PM_MSID_UNKNOWN             -2
 
 
@@ -170,13 +191,43 @@ enum eOUTPUT_FORMAT
 /* del Wed Jan 28 2009 #define	    PM_MTID_PHOTOEGCP           0x2C*/
 #define	    PM_MTID_CDDVD               0x5B
 #define	    PM_MTID_CDDVDHIGH           0x5C
-#define	    PM_MTID_HAGAKIATENA         0x20
 #define	    PM_MTID_THICKPAPER          0x2F
+
+#define	    PM_MTID_MEDICINEBAG         0x2E
+
+#define	    PM_MTID_THICKPAPER	        0x2F
+
+#define	    PM_MTID_BROCHURE            0x30
+#define	    PM_MTID_MATTE_DS            0x31
+#define	    PM_MTID_BSMATTE_DS          0x32
+#define	    PM_MTID_3D                  0x33
+#define	    PM_MTID_LCPP                0x34
+
 #define	    PM_MTID_PREPRINTED          0x35
 #define	    PM_MTID_LETTERHEAD          0x36
 #define	    PM_MTID_RECYCLED	          0x37
 #define	    PM_MTID_COLORPAPER          0x38
+
+#define	    PM_MTID_BUSINESS_PLAIN      0x39
+
+#define	    PM_MTID_PLAIN_ROLL_STICKER  0x3B
+#define	    PM_MTID_GROSSY_ROLL_STICKER 0x3C
+
+#define	    PM_MTID_THICKPAPER1         0x41
+#define	    PM_MTID_THICKPAPER2         0x42
+#define	    PM_MTID_THICKPAPER3         0x43
+
+#define	    PM_MTID_HIGHQUALITY_PLAIN   0x46
+#define	    PM_MTID_BS_HALFGLOSSY_DS    0x47
+
+#define	    PM_MTID_CDDVD               0x5B
+#define	    PM_MTID_CDDVDHIGH           0x5C
+#define	    PM_MTID_CDDVDGLOSSY         0x5D
+
 #define	    PM_MTID_CLEANING            0x63
+#define	    PM_MTID_PLOOFING_WHITE_MAT  0x8E
+#define	    PM_MTID_AUTO_PLAIN          0xFD
+
 #define	    PM_MTID_UNKNOWN             -2
 
 

@@ -82,6 +82,14 @@ OPTION_DATA mediaSizeData[] = {
     {PM_MSID_PALBUM_A5_L,   "PAA5L",    N_("P.Album A5 (Landscape) 210 x 148 mm") },
     {PM_MSID_PALBUM_A4,     "PAA4",     N_("P.Album A4 210 x 297 mm")           },
     {PM_MSID_4X7,           "4X7",      N_("16x9 wide size (102 x 181 mm)")},
+
+    {PM_MSID_KAKU_2,        "ENVK2",    N_("KAKU_2 240 x 332 mm")},
+    {PM_MSID_ENV_C4_P,      "ENVC4P",   N_("ENV_C4_P 229 x 324 mm")},
+    {PM_MSID_B6,            "B6",       N_("B6 128 x 182 mm")},
+    {PM_MSID_KAKU_20,       "ENVK20",   N_("KAKU_20 229 x 324 mm")},
+    {PM_MSID_A5_24HOLE,     "A5_24HOLE", N_("A5_24HOLE 148 x 210 mm")},
+    {PM_MSID_CHOKEI_40,     "ENVC40",   N_("CHOKEI_40 90 x 225 mm")},
+
     {PM_MSID_A3NOBI,        "A3+",      N_("A3+ 329x483 mm")          },
     {PM_MSID_A3,            "A3",       N_("A3  297x420 mm")                    },
     {PM_MSID_B4,            "B4",       N_("B4  257x364 mm")                    },
@@ -92,7 +100,20 @@ OPTION_DATA mediaSizeData[] = {
     {PM_MSID_USC,           "USC",      N_("US C 17 x 22 in")},
     {PM_MSID_10X12,	    "10X12",	N_("10x12 in / 254x305 mm")},
     {PM_MSID_12X12,	    "12X12",	N_("30 x 30 cm (12 x 12 in)")},
+
+    {PM_MSID_SP1,           "SP1",      N_("SP1 210 x 270 mm")},
+    {PM_MSID_SP2,           "SP2",      N_("SP2 210 x 149 mm")},
+    {PM_MSID_SP3,           "SP3",      N_("SP3 100 x 170 mm")},
+    {PM_MSID_SP4,           "SP4",      N_("SP4 130 x 182 mm")},
+    {PM_MSID_SP5,           "SP5",      N_("SP5 192 x 132 mm")},
+    {PM_MSID_16K,           "16K",      N_("16K 195 x 270 mm")},
+    {PM_MSID_8K,            "8K",       N_("8K 270 x 390 mm")},
+
     {PM_MSID_USER,          "USER",     N_("User Defined")},
+
+    {PM_MSID_HALFCUT,       "HALFCUT",  N_("HALFCUT 356 x 432 mm")},
+    {PM_MSID_16X20,         "16X20",    N_("16X20 406 x 508 mm")},
+
     {PM_MSID_UNKNOWN,       "UNKNOWN",  N_("Unknown Paper Size")},
     {END_ARRAY,                "",         ""                                      }
 };
@@ -157,6 +178,25 @@ OPTION_DATA mediaTypeData[] = {
     { PM_MTID_RECYCLED,    "RECYCLED",    N_("Recycled")},
     { PM_MTID_COLORPAPER,    "COLORPAPER",    N_("Color")},
     { PM_MTID_CLEANING,      "CLEAN",    N_("Cleaning Sheet")},
+
+    { PM_MTID_MEDICINEBAG,   "MEDICINEBAG", N_("Medicine bag")},
+    { PM_MTID_BROCHURE,	     "BROCHURE",    N_("Brochure & Flyer Paper Glossy Double-sided")},
+    { PM_MTID_MATTE_DS,	     "MATTEDS",     N_("EPSON Matte Double-sided")},
+    { PM_MTID_BSMATTE_DS,    "BSMATTEDS",   N_("EPSON Bussines card Matte Double-sided")},
+    { PM_MTID_3D,	         "3D",          N_("3D media")},
+    { PM_MTID_LCPP,	         "LCPP",        N_("Photo Paper Glossy")},
+    { PM_MTID_PLAIN_ROLL_STICKER, "PLAINROLLSTICKER", N_("Plain Roll Sticker")},
+    { PM_MTID_GROSSY_ROLL_STICKER, "GROSSYROLLSTICKER", N_("Glossy Roll Sticker")},
+    { PM_MTID_BS_HALFGLOSSY_DS, "BSHALFGLOSSYDS", N_("Bussines card Harf Glossy Double-sided")},
+    { PM_MTID_CDDVDGLOSSY,	 "CDDVDGLOSSY", N_("CD/DVD Glossy Surface")},
+    { PM_MTID_PLOOFING_WHITE_MAT, "PLOOFINGWHITEMAT", N_("Proofing Paper White Semimatte")},
+    { PM_MTID_AUTO_PLAIN,    "AUTO_PLAIN",  N_("Auto Select Plain Paper")},
+    { PM_MTID_BUSINESS_PLAIN,    "BUSINESS_PLAIN",  N_("Business Plain Paper")},
+    { PM_MTID_HIGHQUALITY_PLAIN,    "HIGHQUALITY_PLAIN",  N_("High Quality Plain Paper")},
+    { PM_MTID_THICKPAPER1,    "THICK1",  N_("ThickPaper1")},
+    { PM_MTID_THICKPAPER2,    "THICK2",  N_("ThickPaper2")},
+    { PM_MTID_THICKPAPER3,    "THICK3",  N_("ThickPaper3")},
+
     { PM_MTID_UNKNOWN,       "UNKNOWN",  N_("Unknown Paper Type")},
     { END_ARRAY,             "",         ""                       }
 };
