@@ -1,61 +1,78 @@
+# The lsb release used in the tarball name
+%global lsb 1lsb3.2
 
-%define pkg     epson-inkjet-printer-escpr
-%define ver     1.6.18
-%define rel     1
+Name:           epson-inkjet-printer-escpr
+Summary:        Drivers for Epson inkjet printers
+Group:          Applications/System
+Version:        1.6.18
+Release:        1
+License:        GPLv2+
+URL:            http://download.ebz.epson.net/dsc/search/01/search/?OSC=LX
+# Download address is garbled on web page
+Source0:        %{name}-%{version}.tar.gz
+# PPD files extracted from escpr2 tarball, but tested and compatible with escpr
+Source1:        Epson-ET-3700_Series-epson-escpr-en.ppd
 
-%define cupsfilterdir   /usr/lib/cups/filter
-%define cupsppddir      /usr/share/ppd
+BuildRequires:  gcc
+BuildRequires:  autoconf
+BuildRequires:  chrpath
+BuildRequires:  cups-devel
+BuildRequires:  libjpeg-devel
 
-Name: %{pkg}
-Version: %{ver}
-Release: %{rel}
-Source0: %{name}-%{version}.tar.gz
-License: GPL
-Vendor: Seiko Epson Corporation
-URL: http://download.ebz.epson.net/dsc/search/01/search/?OSC=LX
-Packager: Seiko Epson Corporation <linux-printer@epson.jp>
-BuildRoot: %{_tmppath}/%{name}-%{version}
-Group: Applications/System
-Summary: Epson Inkjet Printer Driver (ESC/P-R) for Linux
+# For automatic detection of printer drivers
+BuildRequires:  python3-cups
+# For dir ownership
+Requires:       cups-filesystem
+# So that automatic printer driver installation works
+BuildRequires:  python-cups
 
 %description
-This software is a filter program used with Common UNIX Printing
-System (CUPS) from the Linux. This can supply the high quality print
-with Seiko Epson Color Ink Jet Printers.
+This package contains drivers for Epson Inkjet printers that use 
+the New Generation Epson Printer Control Language.
 
-This product supports only EPSON ESC/P-R printers. This package can be
-used for all EPSON ESC/P-R printers.
-
-For detail list of supported printer, please refer to below site:
-http://download.ebz.epson.net/dsc/search/01/search/?OSC=LX
+For a detailed list of supported printers, please refer to
+http://avasys.jp/english/linux_e/
 
 %prep
 %setup -q
 
+# Fix permissions
+find . -name \*.h -exec chmod 644 {} \;
+find . -name \*.c -exec chmod 644 {} \;
+for f in README README.ja COPYING AUTHORS NEWS; do
+ chmod 644 $f
+done
+
 %build
-%configure \
-	--with-cupsfilterdir=%{cupsfilterdir} \
-	--with-cupsppddir=%{cupsppddir}
+autoconf
+%configure --disable-static --enable-shared --disable-rpath
+# SMP make doesn't work
+#make %{?_smp_mflags}
 make
 
 %install
-rm -rf ${RPM_BUILD_ROOT}
-make install-strip DESTDIR=${RPM_BUILD_ROOT}
+make install DESTDIR=%{buildroot} CUPS_PPD_DIR=%{_datadir}/ppd/Epson
+# Get rid of .la files
+rm -f %{buildroot}%{_libdir}/*.la
+# Copy extra PPD files
+cp Epson-ET-3700_Series-epson-escpr-en.ppd %{buildroot}%{_datadir}/ppd/Epson/epson-inkjet-printer-escpr
+# Compress ppd files
+for ppd in %{buildroot}%{_datadir}/ppd/Epson/epson-inkjet-printer-escpr/*.ppd; do
+ gzip $ppd
+done
+# Get rid of rpath
+chrpath --delete %{buildroot}%{_cups_serverbin}/filter/epson-escpr
+# Copy documentation
+cp -a README README.ja COPYING AUTHORS NEWS ..
 
-%post
-/sbin/ldconfig
+# Get rid of .so file, since no headers are installed.
+rm %{buildroot}%{_libdir}/libescpr.so
 
-%postun
-/sbin/ldconfig
-
-%clean
-make clean
-rm -rf ${RPM_BUILD_ROOT}
+%post -p /sbin/ldconfig
+%postun -p /sbin/ldconfig
 
 %files
-%defattr(-,root,root)
-%doc AUTHORS COPYING NEWS README README.ja
-%{cupsfilterdir}/epson-escpr
-%{cupsfilterdir}/epson-escpr-wrapper
-%{_libdir}/libescpr.*
-%{cupsppddir}/epson-inkjet-printer-escpr/*.ppd
+%doc README README.ja COPYING AUTHORS NEWS
+%{_cups_serverbin}/filter/epson-*
+%{_datadir}/ppd/Epson/
+%{_libdir}/libescpr.so.*
